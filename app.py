@@ -137,7 +137,18 @@ def get_csv_questions(params):
 
     return format_questions(filtered, limit)
 
+@app.route("/api_chat", methods=["POST"])
+def api_chat():
+    req = request.get_json()
+    user_message = req.get("message")
 
+    if not user_message:
+        return jsonify({"response": "No message received."})
+
+    # TEMPORARY RESPONSE (we’ll plug Gemini/OpenAI later)
+    return jsonify({
+        "response": f"API Chat received your question: {user_message}"
+    })
 @app.route("/chat", methods=["POST"])
 def chat():
     req = request.get_json()
